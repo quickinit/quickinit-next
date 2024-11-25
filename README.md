@@ -171,19 +171,6 @@ The template uses GitHub Actions for automated deployments. The workflow is trig
 - Push to main branch
 - Pull request to main branch
 
-### Manual Deployment (if needed)
-
-#### Vercel (Recommended)
-```bash
-vercel
-```
-
-#### Docker
-```bash
-docker build -t nextjs-starter .
-docker run -p 3000:3000 nextjs-starter
-```
-
 ## 🤝 Contributing
 
 1. Fork the repository
