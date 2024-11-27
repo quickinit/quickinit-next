@@ -1,6 +1,7 @@
 # 🚀 Next.js 14 Starter Template
 
-A modern, production-ready starter template for Next.js 14 applications featuring shadcn/ui components, form validation, and automated deployments.
+A modern, production-ready starter template for Next.js 14 applications featuring shadcn/ui components, form validation,
+and automated deployments.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Next.js](https://img.shields.io/badge/Next.js-14.0-blueviolet.svg)](https://nextjs.org/)
@@ -37,22 +38,26 @@ A modern, production-ready starter template for Next.js 14 applications featurin
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/Rushi0508/nextjs-starter.git your-project
 cd your-project
 ```
 
 2. Install dependencies:
+
 ```bash
 pnpm install
 ```
 
 3. Create a `.env.local` file:
+
 ```bash
 cp .env.example .env.local
 ```
 
 4. Start the development server:
+
 ```bash
 pnpm dev
 ```
@@ -63,7 +68,7 @@ Visit [http://localhost:3000](http://localhost:3000) to see your application.
 
 ```
 ├── app/                 # App router pages
-├── components/         
+├── components/
 │   └── ui/             # shadcn/ui components
 ├── lib/                # Utility functions
 ├── hooks/              # Custom React hooks
@@ -92,20 +97,20 @@ Visit [http://localhost:3000](http://localhost:3000) to see your application.
 This template uses Zod with React Hook Form for robust form validation:
 
 ```typescript
-import { z } from "zod"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8)
-})
+	email: z.string().email(),
+	password: z.string().min(8),
+});
 
 export function LoginForm() {
-  const form = useForm({
-    resolver: zodResolver(schema)
-  })
-  // ...
+	const form = useForm({
+		resolver: zodResolver(schema),
+	});
+	// ...
 }
 ```
 
@@ -127,6 +132,7 @@ pnpm test
 # Run tests in watch mode
 pnpm test:watch
 
+
 # Generate coverage report
 pnpm test:coverage
 ```
@@ -136,11 +142,13 @@ pnpm test:coverage
 This template uses GitHub Actions for automated deployment. To trigger a deployment:
 
 1. Include "DEPLOY" in your commit message:
+
 ```bash
 git commit -m "feat: add new feature DEPLOY"
 ```
 
 2. Push to your repository:
+
 ```bash
 git push origin main
 ```
@@ -167,6 +175,7 @@ This template includes:
 ## 🚀 Deployment
 
 The template uses GitHub Actions for automated deployments. The workflow is triggered when:
+
 - A commit message contains "DEPLOY"
 - Push to main branch
 - Pull request to main branch
@@ -189,8 +198,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Next.js](https://nextjs.org)
 - [Tailwind CSS](https://tailwindcss.com)
 
-
 ## 📧 Contact
 
-Rushi Gandhi - [@thenileshdarji](https://twitter.com/thenileshdarji)
-Nilesh Darji - [@thenileshdarji](https://twitter.com/thenileshdarji)
+Rushi Gandhi - [@thenileshdarji](https://twitter.com/thenileshdarji) Nilesh Darji -
+[@thenileshdarji](https://twitter.com/thenileshdarji)
