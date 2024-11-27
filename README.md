@@ -23,7 +23,6 @@ and automated deployments.
 - **Absolute Imports** configured
 - **SEO** optimization out of the box
 - **Dark Mode** support with shadcn/ui
-- **Responsive Layout** components
 - **API Routes** examples
 - **Error Handling** setup
 - **Environment Variables** configuration
