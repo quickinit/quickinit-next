@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export const safeParse = <T>(parse: (_: any) => T, input: any): T => {
 	try {
 		const output = parse(input);
@@ -9,68 +11,37 @@ export const safeParse = <T>(parse: (_: any) => T, input: any): T => {
 };
 
 export const getString = (input: any): string => {
-	// TODO: Replace with zod
-	if (typeof input != 'string') {
-		throw new Error(`${input} of type ${typeof input} is not a valid string!`);
-	}
-	return input;
+	return z.string().parse(input);
 };
 
 export const getNonEmptyString = (input: any): string => {
-	const output = getString(input);
-	if (output === '') {
-		throw new Error(`${input} is an empty string!`);
-	}
-	return output;
+	return z.string().min(1).parse(input);
 };
 
 export const getNumber = (input: any): number => {
-	if (typeof input !== 'string' && typeof input !== 'number') {
-		throw new Error(`${input} of type ${typeof input} is not a valid number!`);
-	}
-	const int = Number(`${input}`);
-
-	if (isNaN(int)) {
-		throw new Error(`${input} of type ${typeof input} is not a valid number!`);
-	}
-
-	return int;
+	return z.number().or(z.string().regex(/^\d+$/).transform(Number)).parse(input);
 };
 
 export const getNonNegativeNumber = (input: any): number => {
-	const int = getNumber(input);
-
-	if (int < 0) {
-		throw new Error(`${int} is not a non-negative number!`);
-	}
-
-	return int;
+	return z.number().min(0).or(z.string().regex(/^\d+$/).transform(Number)).parse(input);
 };
 
 export const getBoolean = (input: any): boolean => {
-	if (
-		typeof input !== 'boolean' ||
-		(typeof input === 'string' && input !== 'true' && input !== 'false') ||
-		(typeof input === 'number' && input !== 0 && input !== 1)
-	) {
-		throw new Error(`${input} of type ${typeof input} is not a valid boolean!`);
-	}
-
-	if (typeof input === 'string') {
-		return input === 'true';
-	} else if (typeof input === 'number') {
-		return input === 0 ? false : true;
-	} else {
-		return input;
-	}
+	return z
+		.boolean()
+		.or(z.enum(['true', 'false']).transform((val) => val === 'true'))
+		.or(
+			z
+				.number()
+				.min(0)
+				.max(1)
+				.transform((val) => Boolean(val))
+		)
+		.parse(input);
 };
 
 export const getArray = <T>(input: any): T[] => {
-	if (!Array.isArray(input)) {
-		throw new Error(`${input} of type ${typeof input} is not a valid array!`);
-	}
-
-	return input;
+	return z.array(z.any()).parse(input);
 };
 
 export const getSingletonValue = <T>(input: T[]): T => {
