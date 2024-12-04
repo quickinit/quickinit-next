@@ -6,6 +6,9 @@ export const url: Record<T_URL, string> = {
 	db: process.env.POSTGRES_DB_URI || 'postgresql://postgres:postgres@localhost:5432/postgres',
 };
 
+export const PROTECTED_ROUTES = ['/dashboard(.*)'];
+
 export const node_env: 'development' | 'production' | 'test' = process.env.NODE_ENV || 'development';
 
-export const jwtSecret: string = process.env.NEXT_PUBLIC_APP_JWT_SECRET || 'secret';
+export const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET || 'my-secret';
+export const NEXTAUTH_URL = process.env.NEXTAUTH_URL || 'http://localhost:3000';
