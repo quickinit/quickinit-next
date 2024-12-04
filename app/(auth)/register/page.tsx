@@ -12,6 +12,10 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDes
 import { Input } from '@/components/ui/input';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { PasswordInput } from '@/components/ui/password-input';
+import { toast } from 'sonner';
+import axios, { isAxiosError } from 'axios';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z
 	.object({
@@ -33,6 +37,7 @@ const formSchema = z
 
 export default function RegisterPage() {
 	const [isLoading, setIsLoading] = React.useState(false);
+	const router = useRouter();
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -46,11 +51,17 @@ export default function RegisterPage() {
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		setIsLoading(true);
-
-		// Simulate API call
-		await new Promise((resolve) => setTimeout(resolve, 1000));
-
-		console.log(values);
+		try {
+			const res = await axios.post('/api/auth/register', values);
+			toast.success(res.data.message);
+			router.push('/login');
+		} catch (error) {
+			if (isAxiosError(error)) {
+				toast.error(error.response?.data?.error);
+			}
+		} finally {
+			setIsLoading(false);
+		}
 		setIsLoading(false);
 	}
 

@@ -1,5 +1,5 @@
 'use client';
-import { Code, Github, Layout, Palette, Shield, CheckCircle2, Terminal, Copy } from 'lucide-react';
+import { Code, Github, Layout, Palette, Shield, CheckCircle2, Terminal, Copy, LogOut } from 'lucide-react';
 
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
@@ -7,48 +7,50 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
 import Link from 'next/link';
+import { signOut, useSession } from 'next-auth/react';
+const features = [
+	{
+		icon: Code,
+		title: 'Next.js 14',
+		description: 'App Router, Server Components, Optimized Performance',
+	},
+	{
+		icon: Shield,
+		title: 'TypeScript',
+		description: 'Robust Type Safety & Enhanced Developer Experience',
+	},
+	{
+		icon: Palette,
+		title: 'Shadcn UI',
+		description: 'Beautiful, Accessible, Customizable Components',
+	},
+	{
+		icon: Layout,
+		title: 'Tailwind CSS',
+		description: 'Utility-First Styling with Rapid Development',
+	},
+];
+
+const technicalFeatures = [
+	'Zod Form Validation',
+	'React Hook Form',
+	'ESLint & Prettier',
+	'Jest & React Testing Library',
+	'Husky Git Hooks',
+	'Commitlint',
+	'Absolute Imports',
+	'Dark Mode Support',
+	'API Routes',
+	'Error Handling',
+	'Environment Config',
+	'Winston Logs',
+	'Zustand State Management',
+	'GitHub Workflows',
+	'Middleware Setup',
+];
 
 export default function HomePage() {
-	const features = [
-		{
-			icon: Code,
-			title: 'Next.js 14',
-			description: 'App Router, Server Components, Optimized Performance',
-		},
-		{
-			icon: Shield,
-			title: 'TypeScript',
-			description: 'Robust Type Safety & Enhanced Developer Experience',
-		},
-		{
-			icon: Palette,
-			title: 'Shadcn UI',
-			description: 'Beautiful, Accessible, Customizable Components',
-		},
-		{
-			icon: Layout,
-			title: 'Tailwind CSS',
-			description: 'Utility-First Styling with Rapid Development',
-		},
-	];
-
-	const technicalFeatures = [
-		'Zod Form Validation',
-		'React Hook Form',
-		'ESLint & Prettier',
-		'Jest & React Testing Library',
-		'Husky Git Hooks',
-		'Commitlint',
-		'Absolute Imports',
-		'Dark Mode Support',
-		'API Routes',
-		'Error Handling',
-		'Environment Config',
-		'Winston Logs',
-		'Zustand State Management',
-		'GitHub Workflows',
-		'Middleware Setup',
-	];
+	const { data: session, status } = useSession();
 
 	const copyInstallCommand = () => {
 		navigator.clipboard.writeText('npx create-next-app@latest quickinit-next');
@@ -60,6 +62,20 @@ export default function HomePage() {
 	return (
 		<div className='min-h-screen bg-background'>
 			<div className='absolute right-4 top-4 flex space-x-4'>
+				{status === 'unauthenticated' ? (
+					<Link href={'/login'}>Login</Link>
+				) : (
+					<Button
+						onClick={() => {
+							signOut({ redirect: false });
+						}}
+						variant='outline'
+						size='icon'
+					>
+						<LogOut />
+					</Button>
+				)}
+
 				<ThemeToggle />
 			</div>
 
@@ -72,6 +88,12 @@ export default function HomePage() {
 					<p className='mx-auto max-w-2xl text-xl text-muted-foreground'>
 						Enterprise-Grade Next.js Starter Kit for Rapid Development
 					</p>
+
+					{session && (
+						<div className='mt-4 text-lg text-muted-foreground'>
+							Logged in as: <strong>{session.user?.name}</strong> ({session.user?.email})
+						</div>
+					)}
 
 					<div className='mt-8 flex justify-center space-x-4'>
 						<Button variant='secondary' asChild size='lg'>

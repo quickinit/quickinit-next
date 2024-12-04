@@ -13,6 +13,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { toast } from 'sonner';
 import { PasswordInput } from '@/components/ui/password-input';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
 	email: z.string().email('Invalid email address'),
@@ -21,6 +22,7 @@ const formSchema = z.object({
 
 export default function LoginPage() {
 	const [isLoading, setIsLoading] = React.useState(false);
+	const router = useRouter();
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -40,6 +42,7 @@ export default function LoginPage() {
 		if (res?.error) {
 			toast.error('Invalid email or password');
 		} else {
+			router.push('/');
 			toast.success('Logged in successfully');
 		}
 		setIsLoading(false);
