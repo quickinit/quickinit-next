@@ -140,7 +140,7 @@ export function LoginForm() {
 Configure your environment variables in `.env.local`:
 
 ```env
-DATABASE_URL="postgresql://root:root@localhost:5442/starter?schema=public"
+DATABASE_URL="mongodb://localhost:27017/starter"
 NEXTAUTH_SECRET="super-secret"
 NEXTAUTH_URL="http://localhost:3000"
 NEXT_PUBLIC_FRONTEND_BASE_URL="http://localhost:3000"
