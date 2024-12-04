@@ -71,7 +71,7 @@ export const exportAsJSON = (data: any, name: string) => {
 export const jsonToCsv = (json: any[]) => {
 	const replacer = (_: any, value: any) => (value === null ? '' : value);
 	const header = Object.keys(json[0]);
-	let csv = json.map((row: any) => header.map((fieldName) => JSON.stringify(row[fieldName], replacer)).join(','));
+	const csv = json.map((row: any) => header.map((fieldName) => JSON.stringify(row[fieldName], replacer)).join(','));
 	csv.unshift(header.join(','));
 	return csv.join('\r\n');
 };

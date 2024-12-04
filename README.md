@@ -1,4 +1,4 @@
-# 🚀 Next.js 14 Starter Template
+# 🚀 QuickInit Next.js Starter Template
 
 A modern, production-ready starter template for Next.js 14 applications featuring shadcn/ui components, form validation,
 and automated deployments.
@@ -19,27 +19,34 @@ and automated deployments.
 - **Jest** and **React Testing Library** for testing
 - **Husky** for Git hooks
 - **Commitlint** for consistent commit messages
-- **GitHub Actions** for automated deployment
 - **Absolute Imports** configured
-- **SEO** optimization out of the box
 - **Dark Mode** support with shadcn/ui
 - **API Routes** examples
 - **Error Handling** setup
 - **Environment Variables** configuration
+- Builtin **Logs** Management using **winston**
+- Context management using **zustand**
+- GitHub Workflows for merge checks
 
 ## 📦 Getting Started
+
+### Quick Installation
+
+```bash
+npx create-qi@latest
+```
 
 ### Prerequisites
 
 - Node.js 20 or later
 - pnpm (recommended) or npm
 
-### Installation
+### Manual Installation
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/Rushi0508/nextjs-starter.git your-project
+git clone https://github.com/quickinit/quickinit-next.git your-project
 cd your-project
 ```
 
@@ -66,30 +73,45 @@ Visit [http://localhost:3000](http://localhost:3000) to see your application.
 ## 🏗️ Project Structure
 
 ```
-├── app/                 # App router pages
+├── .husky/             # Git hooks configuration
+├── app/                # Application routing and page components
 ├── components/
-│   └── ui/             # shadcn/ui components
-├── lib/                # Utility functions
+│   └── ui/             # Reusable UI components from shadcn/ui
+├── config/             # Global configuration files
+├── constants/          # Constant values and enums
+├── lib/                # Shared utility functions and helpers
 ├── hooks/              # Custom React hooks
-├── styles/             # Global styles
-├── public/             # Static assets
-├── tests/              # Test files
-├── types/              # TypeScript types
-├── schemas/            # Zod validation schemas
+├── logger/             # Logging configuration and utilities
+├── messages/           # Toast and notification system
+├── prisma/             # Prisma ORM database schema and migrations
+├── services/           # API service layers and external integrations
+├── public/             # Static assets and public files
+├── types/              # TypeScript type definitions
+├── utils/              # Utility functions and helpers
+├── validations/        # Zod validation schemas
 └── .github/
-    └── workflows/      # GitHub Actions workflows
+    └── workflows/      # Github workflows
 ```
 
 ## 🛠️ Development
 
 ### Available Scripts
 
-- `pnpm dev` - Start development server
-- `pnpm build` - Build production bundle
-- `pnpm start` - Start production server
-- `pnpm test` - Run tests
-- `pnpm lint` - Run linting
-- `pnpm type-check` - Run TypeScript checks
+- `pnpm dev` - Start development server with Next.js
+- `pnpm build` - Build production bundle with Next.js
+- `pnpm start` - Start production server with Next.js
+- `pnpm test` - Run tests with Jest
+- `pnpm lint` - Run linting with Next.js
+- `pnpm type-check` - Run TypeScript checks with Next.js
+- `pnpm format` - Format code with Prettier
+- `pnpm format:check` - Check code format with Prettier
+- `pnpm prepare` - Install Husky hooks
+- `pnpm db:generate` - Generate Prisma database schema
+- `pnpm db:push` - Push Prisma database schema to database
+- `pnpm db:studio` - Open Prisma database studio
+- `pnpm db:migrate` - Run Prisma database migrations
+- `pnpm db:deploy` - Deploy Prisma database migrations
+- `pnpm db:reset` - Reset Prisma database migrations
 
 ### Form Validation
 
@@ -118,8 +140,11 @@ export function LoginForm() {
 Configure your environment variables in `.env.local`:
 
 ```env
-NEXT_PUBLIC_API_URL=your_api_url
-DATABASE_URL=your_database_url
+DATABASE_URL="postgresql://root:root@localhost:5442/starter?schema=public"
+NEXTAUTH_SECRET="super-secret"
+NEXTAUTH_URL="http://localhost:3000"
+NEXT_PUBLIC_FRONTEND_BASE_URL="http://localhost:3000"
+NEXT_PUBLIC_BACKEND_BASE_URL="http://localhost:3000/api"
 ```
 
 ### Testing
@@ -135,24 +160,6 @@ pnpm test:watch
 # Generate coverage report
 pnpm test:coverage
 ```
-
-### Automated Deployment
-
-This template uses GitHub Actions for automated deployment. To trigger a deployment:
-
-1. Include "DEPLOY" in your commit message:
-
-```bash
-git commit -m "feat: add new feature DEPLOY"
-```
-
-2. Push to your repository:
-
-```bash
-git push origin main
-```
-
-The GitHub Actions workflow will automatically build and deploy your application.
 
 ### Code Quality
 
@@ -199,5 +206,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-Rushi Gandhi - [@thenileshdarji](https://twitter.com/thenileshdarji) Nilesh Darji -
-[@thenileshdarji](https://twitter.com/thenileshdarji)
+- [Rushi Gandhi](https://rushi-web.vercel.app/)
+- [Nilesh Darji](https://nileshdarji.me/)
