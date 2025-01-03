@@ -7,25 +7,56 @@ assignees: Nilesh9106
 
 ---
 
-### Description
-A clear and concise description of the bug.
+## 🐞 **Bug Report**  
+**Found something fishy? Let’s squash it together!**  
+Help us improve QuickInit by reporting any bugs or unexpected behavior you’ve encountered.  
 
-### Steps to Reproduce
-1. Do this...
-2. Then this...
-3. See error.
+---
 
-### Expected Behavior
-What you expected to happen.
+### 🧐 **Describe the Bug**  
+A clear and concise description of what the bug is.  
 
-### Actual Behavior
-What actually happened.
+---
 
-### Environment
-- QuickInit Version: [e.g., v1.0.0]
-- Node.js Version: [e.g., v16.13.0]
-- OS: [e.g., macOS, Windows]
-- Browser: [e.g., Chrome, Safari]
+### 🛠️ **Steps to Reproduce**  
+Tell us how to recreate the issue:  
+1. Go to '...'  
+2. Click on '....'  
+3. Scroll down to '....'  
+4. See the error  
 
-### Additional Info
-Any other details, logs, or screenshots that might help.
+---
+
+### ✅ **Expected Behavior**  
+What did you expect to happen?  
+
+---
+
+### ❌ **Actual Behavior**  
+What actually happened instead?  
+
+---
+
+### 📸 **Screenshots or Screen Recordings**  
+If applicable, add screenshots or screen recordings to help explain the problem.  
+
+---
+
+### 🌍 **Environment**  
+Let us know where the bug occurred:  
+- **QuickInit Version**: [e.g., v1.0.0]  
+- **Node.js Version**: [e.g., v16.13.0]  
+- **Operating System**: [e.g., macOS, Windows, Linux]  
+- **Browser**: [e.g., Chrome, Safari, Firefox]  
+
+---
+
+### 📝 **Additional Context**  
+Add any other details, logs, or error messages that might help us debug the issue.  
+
+---
+
+### 💡 **Possible Solution**  
+If you have any ideas on how to fix the issue, feel free to share them!  
+
+---
