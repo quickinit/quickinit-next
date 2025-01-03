@@ -14,33 +14,15 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { PasswordInput } from '@/components/ui/password-input';
 import { toast } from 'sonner';
 import axios, { isAxiosError } from 'axios';
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-
-const formSchema = z
-	.object({
-		name: z.string().min(2, 'Name must be at least 2 characters'),
-		email: z.string().email('Invalid email address'),
-		password: z
-			.string()
-			.min(8, 'Password must be at least 8 characters')
-			.regex(
-				/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-				'Password must contain at least one uppercase letter, one lowercase letter, and one number'
-			),
-		confirmPassword: z.string(),
-	})
-	.refine((data) => data.password === data.confirmPassword, {
-		message: "Passwords don't match",
-		path: ['confirmPassword'],
-	});
+import { registerSchema } from '@/validations';
 
 export default function RegisterPage() {
 	const [isLoading, setIsLoading] = React.useState(false);
 	const router = useRouter();
 
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const form = useForm<z.infer<typeof registerSchema>>({
+		resolver: zodResolver(registerSchema),
 		defaultValues: {
 			name: '',
 			email: '',
@@ -49,7 +31,7 @@ export default function RegisterPage() {
 		},
 	});
 
-	async function onSubmit(values: z.infer<typeof formSchema>) {
+	async function onSubmit(values: z.infer<typeof registerSchema>) {
 		setIsLoading(true);
 		try {
 			const res = await axios.post('/api/auth/register', values);
