@@ -14,25 +14,21 @@ import { toast } from 'sonner';
 import { PasswordInput } from '@/components/ui/password-input';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-
-const formSchema = z.object({
-	email: z.string().email('Invalid email address'),
-	password: z.string().min(8, 'Password must be at least 8 characters'),
-});
+import { loginSchema } from '@/validations';
 
 export default function LoginPage() {
 	const [isLoading, setIsLoading] = React.useState(false);
 	const router = useRouter();
 
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const form = useForm<z.infer<typeof loginSchema>>({
+		resolver: zodResolver(loginSchema),
 		defaultValues: {
 			email: '',
 			password: '',
 		},
 	});
 
-	async function onSubmit(values: z.infer<typeof formSchema>) {
+	async function onSubmit(values: z.infer<typeof loginSchema>) {
 		setIsLoading(true);
 		const res = await signIn('credentials', {
 			email: values.email,
