@@ -61,9 +61,11 @@ export default function HomePage() {
 
 	return (
 		<div className='min-h-screen bg-background'>
-			<div className='absolute right-4 top-4 flex space-x-4'>
+			<div className='absolute right-4 top-4 flex items-center space-x-4'>
 				{status === 'unauthenticated' ? (
-					<Link href={'/login'}>Login</Link>
+					<Link href={'/login'}>
+						<Button variant='outline'>Login</Button>
+					</Link>
 				) : (
 					<Button
 						onClick={() => {
