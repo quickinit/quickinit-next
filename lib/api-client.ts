@@ -36,19 +36,19 @@ class ApiClient {
 		}
 	}
 
-	async get<T>(url: string, params?: Record<string, any>): Promise<ApiResult<T>> {
+	async get<T>(url: string, params?: Record<string, unknown>): Promise<ApiResult<T>> {
 		return this.request<T>({ method: 'GET', url, params });
 	}
 
-	async post<T, D = any>(url: string, data?: D): Promise<ApiResult<T>> {
+	async post<T, D = unknown>(url: string, data?: D): Promise<ApiResult<T>> {
 		return this.request<T>({ method: 'POST', url, data });
 	}
 
-	async put<T, D = any>(url: string, data?: D): Promise<ApiResult<T>> {
+	async put<T, D = unknown>(url: string, data?: D): Promise<ApiResult<T>> {
 		return this.request<T>({ method: 'PUT', url, data });
 	}
 
-	async patch<T, D = any>(url: string, data?: D): Promise<ApiResult<T>> {
+	async patch<T, D = unknown>(url: string, data?: D): Promise<ApiResult<T>> {
 		return this.request<T>({ method: 'PATCH', url, data });
 	}
 
