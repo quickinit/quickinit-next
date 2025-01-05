@@ -16,6 +16,8 @@ import { toast } from 'sonner';
 import axios, { isAxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { registerSchema } from '@/validations';
+import { apiClient } from '@/lib/api-client';
+import { User } from '@prisma/client';
 
 export default function RegisterPage() {
 	const [isLoading, setIsLoading] = React.useState(false);
@@ -34,17 +36,18 @@ export default function RegisterPage() {
 	async function onSubmit(values: z.infer<typeof registerSchema>) {
 		setIsLoading(true);
 		try {
-			const res = await axios.post('/api/auth/register', values);
-			toast.success(res.data.message);
-			router.push('/login');
-		} catch (error) {
-			if (isAxiosError(error)) {
-				toast.error(error.response?.data?.error);
+			const res = await apiClient.post<{ message: string; user: User }>('/api/auth/register', values);
+			if (res.data) {
+				toast.success('Account created successfully');
+				router.push('/login');
+			} else {
+				toast.error(res.error?.message);
 			}
+		} catch (error) {
+			toast.error('An error occurred');
 		} finally {
 			setIsLoading(false);
 		}
-		setIsLoading(false);
 	}
 
 	return (

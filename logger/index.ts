@@ -1,7 +1,8 @@
 import { createLogger, format, transports } from 'winston';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { logsDir } from '@/constants';
+
+const logsDir = 'logs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
