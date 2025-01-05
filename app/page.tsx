@@ -75,6 +75,7 @@ export default function HomePage() {
 						size='icon'
 					>
 						<LogOut />
+						<span className='sr-only'>Log out</span>
 					</Button>
 				)}
 
